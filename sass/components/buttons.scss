@@ -1,0 +1,47 @@
+button {
+  background: #fe142f;
+  display: block;
+  margin: 0 auto;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+
+  &:hover {
+    background: #3876ac;
+  }
+}
+
+.btn-submit {
+  @extend button;
+  margin-top: 0.5em;
+  padding: 1em;
+  border-radius: 15px;
+  font-size: 16px;
+}
+
+.btn-signup {
+  outline: none;
+  text-transform: capitalize;
+  font-size: 1.3rem;
+  padding: 15px 23px;
+  margin: 59px 0 0 ;
+  border-radius: 8px;
+}
+
+.hero-section > .btn-signup {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .hero-content .btn-signup {
+    display: none;
+  }
+
+  .hero-section > .btn-signup {
+    display: flex;
+    align-items: center;
+    margin: 32px auto 10px;
+    padding: 12px 35px;
+    height: 35px;
+  }
+}

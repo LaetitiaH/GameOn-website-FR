@@ -29,6 +29,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const closeBtn = document.querySelectorAll(".close");
 const formData = document.querySelectorAll(".formData");
+const page = document.getElementsByTagName("html")[0];
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -39,10 +40,13 @@ closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 
 // launch modal form
 function launchModal() {
+  window.scrollTo(0, 0);
   modalbg.style.display = "block";
+  page.style.overflow = "hidden";
 }
 
 // close modal form
 function closeModal() {
   modalbg.style.display = "none";
+  page.style.overflow = "auto";
 }
