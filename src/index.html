@@ -62,50 +62,58 @@
               onsubmit="return validate();"
             >
               <div
-                class="formData">
+                class="formData"
+                data-error-visible="false"
+              >
                 <label>Prénom</label>
                 <input
                   class="text-control"
                   type="text"
-                  id="first"
+                  id="firstName"
                   name="first"
                   minlength="2"
+                  required
                 />
               </div>
               <div
-                class="formData">
+                class="formData" data-error-visible="false">
+
                 <label>Nom</label>
                 <input
                   class="text-control"
                   type="text"
-                  id="last"
+                  id="lastName"
                   name="last"
+                  minlength="2"
+                  required
                 />
               </div>
               <div
-                class="formData">
+                class="formData" data-error-visible="false">
                 <label>E-mail</label>
                 <input
                   class="text-control"
                   type="email"
                   id="email"
                   name="email"
+                  required
                 />
               </div>
               <div
-                class="formData">
+                class="formData" data-error-visible="false">
                 <label>Date de naissance</label>
                 <input
                   class="text-control"
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                  required
                 />
               </div>
               <div
-                class="formData">
+                class="formData" data-error-visible="false">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label>
-                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99"/>
+                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required step="1"/>
                </div>
               <p class="text-label">Quelles villes ?</p>
               <div
