@@ -13,9 +13,11 @@ button {
 
 .btn-submit {
   @extend button;
+  width: 180px;
+  height: 40px;
   margin-top: 0.5em;
   padding: 1em;
-  border-radius: 15px;
+  border-radius: 8px;
   font-size: 16px;
 }
 
@@ -44,4 +46,33 @@ button {
     padding: 12px 35px;
     height: 35px;
   }
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(0.7);
+}
+
+.close:before,
+.close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 3px;
+  background-color: #fff;
+}
+
+.close:before {
+  transform: rotate(45deg);
+}
+
+.close:after {
+  transform: rotate(-45deg);
 }
