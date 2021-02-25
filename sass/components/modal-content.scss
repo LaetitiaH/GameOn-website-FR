@@ -41,12 +41,12 @@
   }
 
 
-  .formData[data-error-visible="true"] .text-control {
+  .formData[data-error-visible="true"] .text-control, .checkbox-input.checkbox-icon {
     border: 2px solid #e54858;
     color: red;
   }
-}
 
+}
 @keyframes display-error {
   0% {
     opacity: 0;
@@ -60,6 +60,11 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 5px;
+}
+
+.formData[data-error-visible="true"] .checkbox-label .checkbox-icon {
+  border: 2px solid #e54858;
+  color: red;
 }
 
 .checkbox-label {
@@ -97,6 +102,8 @@
     }
   }
 }
+
+
 
 .checkbox-agree-label {
   .checkbox-icon {

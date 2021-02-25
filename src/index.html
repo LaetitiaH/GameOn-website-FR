@@ -58,19 +58,19 @@
             <form
               name="reserve"
               action="index.html"
-              method="get"
-              onsubmit="return validate();"
+              method="post"
+              onsubmit="return validate(reserve);"
             >
               <div
                 class="formData"
                 data-error-visible="false"
               >
-                <label>Prénom</label>
+                <label for="firstName">Prénom</label>
                 <input
                   class="text-control"
                   type="text"
                   id="firstName"
-                  name="first"
+                  name="firstName"
                   minlength="2"
                   required
                 />
@@ -78,7 +78,7 @@
               <div
                 class="formData" data-error-visible="false">
 
-                <label>Nom</label>
+                <label for="lastName">Nom</label>
                 <input
                   class="text-control"
                   type="text"
@@ -90,7 +90,7 @@
               </div>
               <div
                 class="formData" data-error-visible="false">
-                <label>E-mail</label>
+                <label for="email">E-mail</label>
                 <input
                   class="text-control"
                   type="email"
@@ -101,7 +101,7 @@
               </div>
               <div
                 class="formData" data-error-visible="false">
-                <label>Date de naissance</label>
+                <label for="birthdate">Date de naissance</label>
                 <input
                   class="text-control"
                   type="date"
@@ -112,12 +112,12 @@
               </div>
               <div
                 class="formData" data-error-visible="false">
-                <label>À combien de tournois GameOn avez-vous déjà participé ?</label>
+                <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required step="1"/>
                </div>
               <p class="text-label">Quelles villes ?</p>
               <div
-                class="formData radio-button">
+                class="formData radio-button" data-error-visible="false">
                 <input
                   class="checkbox-input"
                   type="radio"

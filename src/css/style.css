@@ -372,7 +372,7 @@ button:hover, .btn-submit:hover {
 .modal-body .formData[data-error]:nth-child(5n)::after {
   line-height: 1;
 }
-.modal-body .formData[data-error-visible=true] .text-control {
+.modal-body .formData[data-error-visible=true] .text-control, .modal-body .checkbox-input.checkbox-icon {
   border: 2px solid #e54858;
   color: red;
 }
@@ -389,6 +389,11 @@ button:hover, .btn-submit:hover {
   display: flex;
   flex-wrap: wrap;
   margin-top: 5px;
+}
+
+.formData[data-error-visible=true] .checkbox-label .checkbox-icon {
+  border: 2px solid #e54858;
+  color: red;
 }
 
 .checkbox-label {
