@@ -47,96 +47,168 @@ function closeModal() {
   page.style.overflow = "auto";
 }
 
-// Check if formData is valid after focusout
-
-// formData.forEach((formData) =>
-//   formData.addEventListener("change", (event) => {
-//     if (event.target.validity.tooShort) {
-//       const label = formData.children[0].textContent.toLowerCase();
-//       formData.setAttribute(
-//         "data-error",
-//         "Veuillez entrer 2 caractères ou plus pour le champ " + label
-//       );
-//       formData.setAttribute("data-error-visible", true);
-//     } else if (!event.target.validity.valid) {
-//       const label = formData.children[0].textContent.toLowerCase();
-//       formData.setAttribute(
-//         "data-error",
-//         "Le champ " + label + " n'est pas correct"
-//       );
-//     } else {
-//       formData.removeAttribute("data-error");
-//       formData.setAttribute("data-error-visible", false);
-//     }
-//   })
-// );
-
 // Check if formData is valid after submit button click
-
-submitButton.addEventListener("click", validateForm);
-
 function validateForm() {
   const formValues = document.forms["reserve"];
+  let isInvalidForm = false;
 
+  const firstNamelabel = formData[0].children[0].textContent.toLowerCase();
   const firstNameField = formValues[0].value;
+  const firstNameFormData = formData[0];
+  validateField(firstNameField, firstNameFormData, firstNamelabel, [
+    "fieldLength",
+    "minLength",
+  ]);
+
+  const lastNameLabel = formData[1].children[0].textContent.toLowerCase();
+  const lastNameField = formValues[1].value;
+  const lastNameFormData = formData[1];
+  validateField(lastNameField, lastNameFormData, lastNameLabel, [
+    "fieldLength",
+    "minLength",
+  ]);
+
+  const emailLabel = formData[2].children[0].textContent.toLowerCase();
   const emailField = formValues[2].value;
-  const birthdate = formValues[3].value;
-  const numberOfTournament = Number(formValues[4].value);
-  const localisation1 = formValues[5].value;
-  const localisation2 = formValues[6].value;
-  const localisation3 = formValues[7].value;
-  const localisation4 = formValues[8].value;
-  const localisation5 = formValues[9].value;
-  const localisation6 = formValues[10].value;
+  const emailFormData = formData[2];
+  validateField(emailField, emailFormData, emailLabel, [
+    "fieldLength",
+    "emailValid",
+  ]);
 
-  if (firstNameField === "") {
-    const label = formData[0].children[0].textContent;
-    formData[0].setAttribute("data-error", "Le champ " + label + " est vide");
-    formData[0].setAttribute("data-error-visible", true);
-  }
+  const birthdateLabel = formData[3].children[0].textContent.toLowerCase();
+  let birthdateField = formValues[3].value;
+  const birthdateFormData = formData[3];
+  validateField(birthdateField, birthdateFormData, birthdateLabel, [
+    "fieldLength",
+    "dateValid",
+  ]);
 
-  if (firstNameField.length < 2) {
-    const label = formData[0].children[0].textContent;
-    formData[0].setAttribute(
-      "data-error",
-      "Veuillez entrer 2 caractères ou plus pour le champ " + label
-    );
-    formData[0].setAttribute("data-error-visible", true);
-  }
+  const numberOfTournamentLabel = "nombre de tournois";
+  let numberOfTournamentField = formValues[4].value;
+  const numberOfTournamentFormData = formData[4];
+  validateField(
+    numberOfTournamentField,
+    numberOfTournamentFormData,
+    numberOfTournamentLabel,
+    ["fieldLength", "numberValid"]
+  );
 
-  if (!emailField.includes("@")) {
-    const label = formData[2].children[0].textContent;
-    formData[2].setAttribute("data-error", "L'email saisi n'est pas correct ");
-    formData[2].setAttribute("data-error-visible", true);
-  }
+  const localisationLabel = "ville";
+  const localisationField = [
+    formValues[5].checked,
+    formValues[6].checked,
+    formValues[7].checked,
+    formValues[8].checked,
+    formValues[9].checked,
+    formValues[10].checked,
+  ];
+  const localisationFormData = formData[5];
+  validateField(localisationField, localisationFormData, localisationLabel, [
+    "radioButtonSelected",
+  ]);
 
-  if (birthdate) {
-    const BirthdateTimeStamp = Date.parse(birthdate);
-    if (isNaN(BirthdateTimeStamp)) {
-      formData[3].setAttribute("data-error", "La date saisie est incorrecte ");
-      formData[3].setAttribute("data-error-visible", true);
+  const agreeLabel = "Les conditions d'utilisations doivent être acceptée";
+  let agreeField = formValues[11].checked;
+  const agreeFormData = formData[6];
+  validateField(agreeField, agreeFormData, agreeLabel, ["checkboxSelected"]);
+
+  function validateField(nameField, nameFormData, nameLabel, typeOfControl) {
+    if (
+      typeOfControl.find((typeOfControl) => typeOfControl === "fieldLength")
+    ) {
+      if (nameField.length === 0) {
+        nameFormData.setAttribute(
+          "data-error",
+          "Veuillez saisir le champ " + nameLabel
+        );
+        nameFormData.setAttribute("data-error-visible", true);
+        isInvalidForm = true;
+        return;
+      }
+    }
+
+    if (typeOfControl.find((typeOfControl) => typeOfControl === "minLength")) {
+      if (nameField.length < 2) {
+        nameFormData.setAttribute(
+          "data-error",
+          "Veuillez entrer 2 caractères ou plus pour le champ du  " + nameLabel
+        );
+        nameFormData.setAttribute("data-error-visible", true);
+        isInvalidForm = true;
+      }
+    }
+
+    if (typeOfControl.find((typeOfControl) => typeOfControl === "emailValid")) {
+      if (
+        !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          nameField
+        )
+      ) {
+        nameFormData.setAttribute(
+          "data-error",
+          "Veuillez saisir un " + nameLabel + " correct"
+        );
+        nameFormData.setAttribute("data-error-visible", true);
+        isInvalidForm = true;
+      }
+    }
+
+    if (typeOfControl.find((typeOfControl) => typeOfControl === "dateValid")) {
+      if (isNaN(Date.parse(nameField))) {
+        nameFormData.setAttribute(
+          "data-error",
+          "Veuillez saisir une " + nameLabel + " correcte"
+        );
+        nameFormData.setAttribute("data-error-visible", true);
+        isInvalidForm = true;
+      }
+    }
+
+    if (
+      typeOfControl.find((typeOfControl) => typeOfControl === "numberValid")
+    ) {
+      if (
+        !Number.isInteger(+nameField) ||
+        +nameField <= 0 ||
+        +nameField >= 99
+      ) {
+        nameFormData.setAttribute(
+          "data-error",
+          "Veuillez saisir un " + nameLabel + " correct"
+        );
+        nameFormData.setAttribute("data-error-visible", true);
+        isInvalidForm = true;
+      }
+    }
+
+    if (
+      typeOfControl.find(
+        (typeOfControl) => typeOfControl === "radioButtonSelected"
+      )
+    ) {
+      if (!nameField.some((nameField) => nameField)) {
+        nameFormData.setAttribute(
+          "data-error",
+          "Vous devez choisir une " + nameLabel
+        );
+        nameFormData.setAttribute("data-error-visible", true);
+        isInvalidForm = true;
+      }
+    }
+
+    if (
+      typeOfControl.find(
+        (typeOfControl) => typeOfControl === "checkboxSelected"
+      )
+    ) {
+      if (!nameField) {
+        nameFormData.setAttribute("data-error", nameLabel);
+        nameFormData.setAttribute("data-error-visible", true);
+        isInvalidForm = true;
+      }
     }
   }
 
-  if (
-    !Number.isInteger(numberOfTournament) ||
-    numberOfTournament <= 0 ||
-    numberOfTournament >= 99
-  ) {
-    formData[4].setAttribute("data-error", "Le nombre saisi est incorrect ");
-    formData[4].setAttribute("data-error-visible", true);
-  }
-
-  if (
-    !localisation1.checked &&
-    !localisation2.checked &&
-    !localisation3.checked &&
-    !localisation4.checked &&
-    !localisation5.checked &&
-    !localisation6.checked
-  ) {
-    formData[5].setAttribute("data-error", "Le nombre saisi est incorrect ");
-    formData[5].setAttribute("data-error-visible", true);
-  }
-  debugger;
+  return !isInvalidForm;
 }

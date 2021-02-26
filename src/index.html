@@ -58,8 +58,8 @@
             <form
               name="reserve"
               action="index.html"
-              method="post"
-              onsubmit="return validate(reserve);"
+              method="get"
+              onsubmit="return validateForm()"
             >
               <div
                 class="formData"
@@ -83,7 +83,7 @@
                   class="text-control"
                   type="text"
                   id="lastName"
-                  name="last"
+                  name="lastName"
                   minlength="2"
                   required
                 />
@@ -125,7 +125,7 @@
                   name="location"
                   value="New York"
                 />
-                <label class="checkbox-label" for="location1">
+                <label class="radio-checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
                   New York</label
                 >
@@ -136,7 +136,7 @@
                   name="location"
                   value="San Francisco"
                 />
-                <label class="checkbox-label" for="location2">
+                <label class="radio-checkbox-label" for="location2">
                   <span class="checkbox-icon"></span>
                   San Francisco</label
                 >
@@ -147,7 +147,7 @@
                   name="location"
                   value="Seattle"
                 />
-                <label class="checkbox-label" for="location3">
+                <label class="radio-checkbox-label" for="location3">
                   <span class="checkbox-icon"></span>
                   Seattle</label
                 >
@@ -158,7 +158,7 @@
                   name="location"
                   value="Chicago"
                 />
-                <label class="checkbox-label" for="location4">
+                <label class="radio-checkbox-label" for="location4">
                   <span class="checkbox-icon"></span>
                   Chicago</label
                 >
@@ -169,7 +169,7 @@
                   name="location"
                   value="Boston"
                 />
-                <label class="checkbox-label" for="location5">
+                <label class="radio-checkbox-label" for="location5">
                   <span class="checkbox-icon"></span>
                   Boston</label
                 >
@@ -180,7 +180,7 @@
                   name="location"
                   value="Portland"
                 />
-                <label class="checkbox-label" for="location6">
+                <label class="radio-checkbox-label" for="location6">
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
@@ -193,24 +193,25 @@
                   type="checkbox"
                   id="checkbox1"
                   checked
+                  name="agreeCheck"
+                  value="agree"
                 />
-                <label class="checkbox-label checkbox-agree-label" for="checkbox1" required>
+                <label class="checkbox-agree-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2" />
-                <label class="checkbox-label checkbox-agree-label" for="checkbox2">
+                <input class="checkbox-input" type="checkbox" id="checkbox2" value="newsletter" name="newsletterCheck" />
+                <label class="checkbox-newsletter-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br>
               </div>
-              <input
+              <button
                 class="btn-submit"
                 type="submit"
-                value="C'est parti"
-              />
+              >C'est parti</button>
             </form>
           </div>
         </div>
