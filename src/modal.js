@@ -24,7 +24,7 @@ checkSuccessModalDisplay();
 // Detect if click outside nav-bar if nav-bar responsive is open
 document.addEventListener("click", (evt) => {
   const navResponsive = document.getElementById("main-navbar");
-  const targetElement = evt.target; // clicked element
+  const targetElement = evt.target; // clicked on element
   const burgerMenu = document.getElementsByClassName("fa fa-bars")[0];
   if (
     targetElement !== navResponsive &&
@@ -77,6 +77,16 @@ function launchModal() {
 function closeModal() {
   modalBackground.style.display = "none";
   page.style.overflow = "auto";
+
+  // check if url with params and change url
+  if (window.location.search) {
+    replaceUrl();
+  }
+}
+
+function replaceUrl() {
+  const url = window.location.href.split("?", 1)[0];
+  window.location.replace(url);
 }
 
 // Check if formData is valid after click on submit button
@@ -84,51 +94,27 @@ function validateForm() {
   const formValues = document.forms["reserve"];
   let isInvalidForm = false;
 
-  // const test = [[],[]].forEach();
-
-  const firstNamelabel = formData[0].children[0].textContent.toLowerCase();
   const firstNameField = formValues[0].value;
   const firstNameFormData = formData[0];
-  validateField(firstNameField, firstNameFormData, firstNamelabel, [
-    "fieldLength",
-    "minLength",
-  ]);
+  const firstNamelabel = formData[0].children[0].textContent.toLowerCase();
 
-  const lastNameLabel = formData[1].children[0].textContent.toLowerCase();
   const lastNameField = formValues[1].value;
   const lastNameFormData = formData[1];
-  validateField(lastNameField, lastNameFormData, lastNameLabel, [
-    "fieldLength",
-    "minLength",
-  ]);
+  const lastNameLabel = formData[1].children[0].textContent.toLowerCase();
 
-  const emailLabel = formData[2].children[0].textContent.toLowerCase();
   const emailField = formValues[2].value;
   const emailFormData = formData[2];
-  validateField(emailField, emailFormData, emailLabel, [
-    "fieldLength",
-    "emailValid",
-  ]);
+  const emailLabel = formData[2].children[0].textContent.toLowerCase();
 
-  const birthdateLabel = formData[3].children[0].textContent.toLowerCase();
-  let birthdateField = formValues[3].value;
+  const birthdateField = formValues[3].value;
   const birthdateFormData = formData[3];
-  validateField(birthdateField, birthdateFormData, birthdateLabel, [
-    "fieldLength",
-    "dateValid",
-  ]);
+  const birthdateLabel = formData[3].children[0].textContent.toLowerCase();
 
-  const numberOfTournamentLabel = "nombre de tournois";
-  let numberOfTournamentField = formValues[4].value;
+  const numberOfTournamentField = formValues[4].value;
   const numberOfTournamentFormData = formData[4];
-  validateField(
-    numberOfTournamentField,
-    numberOfTournamentFormData,
-    numberOfTournamentLabel,
-    ["fieldLength", "numberValid"]
-  );
+  const numberOfTournamentLabel =
+    "nombre de tournois auxquels vous avez participé";
 
-  const localisationLabel = "ville";
   const localisationField = [
     formValues[5].checked,
     formValues[6].checked,
@@ -138,14 +124,51 @@ function validateForm() {
     formValues[10].checked,
   ];
   const localisationFormData = formData[5];
-  validateField(localisationField, localisationFormData, localisationLabel, [
-    "radioButtonSelected",
-  ]);
+  const localisationLabel = "ville";
 
-  const agreeLabel = "Les conditions d'utilisations doivent être acceptée";
-  let agreeField = formValues[11].checked;
+  const agreeField = formValues[11].checked;
   const agreeFormData = formData[6];
-  validateField(agreeField, agreeFormData, agreeLabel, ["checkboxSelected"]);
+  const agreeLabel = "Les conditions d'utilisations doivent être acceptée";
+
+  const formToValidate = [
+    [
+      firstNameField,
+      firstNameFormData,
+      firstNamelabel,
+      ["fieldLength", "minLength"],
+    ],
+    [
+      lastNameField,
+      lastNameFormData,
+      lastNameLabel,
+      ["fieldLength", "minLength"],
+    ],
+    [emailField, emailFormData, emailLabel, ["fieldLength", "emailValid"]],
+    [
+      birthdateField,
+      birthdateFormData,
+      birthdateLabel,
+      ["fieldLength", "dateValid"],
+    ],
+    [
+      numberOfTournamentField,
+      numberOfTournamentFormData,
+      numberOfTournamentLabel,
+      ["fieldLength", "numberValid"],
+    ],
+    [
+      localisationField,
+      localisationFormData,
+      localisationLabel,
+      ["radioButtonSelected"],
+    ],
+    [agreeField, agreeFormData, agreeLabel, ["checkboxSelected"]],
+  ];
+
+  formToValidate.forEach(
+    ([nameField, nameFormData, nameLabel, typeOfControl]) =>
+      validateField(nameField, nameFormData, nameLabel, typeOfControl)
+  );
 
   function validateField(nameField, nameFormData, nameLabel, typeOfControl) {
     if (
@@ -154,7 +177,7 @@ function validateForm() {
       if (nameField.length === 0) {
         nameFormData.setAttribute(
           "data-error",
-          "Veuillez saisir le champ " + nameLabel
+          "Veuillez saisir votre " + nameLabel
         );
         nameFormData.setAttribute("data-error-visible", true);
         isInvalidForm = true;
@@ -243,5 +266,6 @@ function validateForm() {
       }
     }
   }
+
   return !isInvalidForm;
 }

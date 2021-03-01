@@ -1,0 +1,53 @@
+.radio-button {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.formData[data-error-visible="true"] .radio-checkbox-label .checkbox-icon {
+  border: 2px solid #e54858;
+  color: red;
+}
+
+.checkbox-newsletter-label, .radio-checkbox-label, .checkbox-agree-label {
+  position: relative;
+  margin-left: 36px;
+  margin-bottom: 8px;
+
+  .checkbox-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #279e7a;
+    border-radius: 50%;
+    text-indent: 29px;
+    white-space: nowrap;
+    position: absolute;
+    left: -30px;
+    top: -1px;
+    transition: all 0.3s;
+
+    &::after {
+      content: "";
+      width: 13px;
+      height: 13px;
+      background-color: #279e7a;
+      border-radius: 50%;
+      text-indent: 29px;
+      white-space: nowrap;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: 0.3s;
+      opacity: 0;
+    }
+  }
+}
+
+.formData[data-error-visible="true"] .checkbox-icon {
+  border: 2px solid #e54858;
+  color: red;
+}
+
+

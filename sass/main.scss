@@ -1,8 +1,11 @@
 @import "base/base";
 @import "layouts/layout";
-@import "layouts/modal";
+@import "layouts/form-modal";
+@import "layouts/success-modal";
 @import "components/buttons";
 @import "components/nav";
 @import "components/presentation";
-@import "components/modal-content";
+@import "components/radio-button";
+@import "components/checkbox";
+@import "components/form-content";
 @import "pages/homepage";
