@@ -1,10 +1,25 @@
-// NAVBAR
+// DOM Elements
+const page = document.getElementsByTagName("html")[0];
+const topNav = document.getElementById("myTopnav");
+const modalBackground = document.querySelector(".bground");
+const signUpButton = document.querySelectorAll(".btn-signup");
+const closeIconButton = document.querySelector(".close");
+const closeButton = document.querySelector(".btn-close");
+const formData = document.querySelectorAll(".formData");
+const successMessage = document.querySelector(".successMessage-content");
+const form = document.querySelector(".form");
+const modalBody = document.querySelector(".modal-body");
 
-// Open and close nav-responsive
-function editNav() {
-  let topNav = document.getElementById("myTopnav");
-  topNav.className === "topnav" ? topNav.classList.add("responsive") : false;
-}
+// Listeners CLick buttons
+// launch modal if click on Sign-up button
+signUpButton.forEach((btn) => btn.addEventListener("click", displayForm));
+
+// close modal if click on cross close button or close button
+closeIconButton.addEventListener("click", closeModal);
+closeButton.addEventListener("click", closeModal);
+
+// Display SuccessModal if form valid and data present in params URL
+checkSuccessModalDisplay();
 
 // Detect if click outside nav-bar if nav-bar responsive is open
 document.addEventListener("click", (evt) => {
@@ -20,37 +35,56 @@ document.addEventListener("click", (evt) => {
   }
 });
 
-// DOM Elements
-const page = document.getElementsByTagName("html")[0];
-const modalBackground = document.querySelector(".bground");
-const modalButton = document.querySelectorAll(".btn-signup");
-const closeButton = document.querySelector(".close");
-const formData = document.querySelectorAll(".formData");
-const submitButton = document.querySelector(".btn-submit");
+// FUNCTIONS
+// Open and close nav-responsive
+function editNav() {
+  topNav.className === "topnav" ? topNav.classList.add("responsive") : false;
+}
 
-// launch modal event
-modalButton.forEach((btn) => btn.addEventListener("click", launchModal));
+// Display success message if form valid and data present in params URL
+function checkSuccessModalDisplay() {
+  // Check if params in the URL
+  const isFormSend = !!window.location.search.includes("agreeCheck=agree");
+  if (isFormSend) {
+    displaySuccessMessage();
+  }
+}
 
-// close modal event
-closeButton.addEventListener("click", closeModal);
+// Launch modal form
+function displayForm() {
+  form.style.display = "block";
+  successMessage.style.display = "none";
+  modalBody.classList.remove("successMessage");
+  launchModal();
+}
 
-// launch modal form
+// Launch modal success
+function displaySuccessMessage() {
+  form.style.display = "none";
+  successMessage.style.display = "flex";
+  modalBody.classList.add("successMessage");
+  launchModal();
+}
+
+// Launch modal
 function launchModal() {
   window.scrollTo(0, 0);
   modalBackground.style.display = "block";
   page.style.overflow = "hidden";
 }
 
-// close modal form
+// close modal
 function closeModal() {
   modalBackground.style.display = "none";
   page.style.overflow = "auto";
 }
 
-// Check if formData is valid after submit button click
+// Check if formData is valid after click on submit button
 function validateForm() {
   const formValues = document.forms["reserve"];
   let isInvalidForm = false;
+
+  // const test = [[],[]].forEach();
 
   const firstNamelabel = formData[0].children[0].textContent.toLowerCase();
   const firstNameField = formValues[0].value;
@@ -209,6 +243,5 @@ function validateForm() {
       }
     }
   }
-
   return !isInvalidForm;
 }

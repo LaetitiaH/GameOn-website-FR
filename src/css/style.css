@@ -99,9 +99,10 @@ footer .copyrights {
   .content {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    min-height: calc(100% - 80px);
   }
 }
-button, .btn-submit {
+button, .btn-submit, .btn-close {
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -109,11 +110,11 @@ button, .btn-submit {
   cursor: pointer;
   border: 0;
 }
-button:hover, .btn-submit:hover {
+button:hover, .btn-submit:hover, .btn-close:hover {
   background: #3876ac;
 }
 
-.btn-submit {
+.btn-submit, .btn-close {
   width: 180px;
   height: 40px;
   margin-top: 0.5em;
@@ -339,6 +340,30 @@ button:hover, .btn-submit:hover {
 .modal-body {
   padding: 15px 8%;
   margin: 5px auto;
+}
+.modal-body .form {
+  display: block;
+}
+.modal-body .successMessage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 650px;
+}
+@media screen and (max-width: 800px) {
+  .modal-body .successMessage {
+    height: calc(100vh - 100px);
+  }
+}
+.modal-body .successMessage-content {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 400;
+  padding: 0 20px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
 }
 .modal-body label {
   font-family: var(--font-default);

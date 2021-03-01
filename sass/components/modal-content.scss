@@ -4,6 +4,34 @@
   padding: 15px 8%;
   margin: 5px auto;
 
+  .form {
+    display: block;
+  }
+
+  .successMessage {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 650px;
+  }
+
+  @media screen and (max-width: 800px) {
+    .successMessage {
+      height: calc(100vh - 100px)
+    }
+  }
+
+  .successMessage-content {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 400;
+    padding: 0 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+  }
+
   label {
     font-family: var(--font-default);
     font-size: 12px;
@@ -238,8 +266,3 @@
   font-size: 12px;
   margin-top: 10px;
 }
-
-
-
-
-
