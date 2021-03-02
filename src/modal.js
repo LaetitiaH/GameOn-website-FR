@@ -166,8 +166,11 @@ function validateForm() {
   ];
 
   formToValidate.forEach(
-    ([nameField, nameFormData, nameLabel, typeOfControl]) =>
-      validateField(nameField, nameFormData, nameLabel, typeOfControl)
+    ([nameField, nameFormData, nameLabel, typeOfControl]) => {
+      nameFormData.setAttribute("data-error-visible", false);
+      nameFormData.removeAttribute("data-error");
+      validateField(nameField, nameFormData, nameLabel, typeOfControl);
+    }
   );
 
   function validateField(nameField, nameFormData, nameLabel, typeOfControl) {
@@ -225,11 +228,7 @@ function validateForm() {
     if (
       typeOfControl.find((typeOfControl) => typeOfControl === "numberValid")
     ) {
-      if (
-        !Number.isInteger(+nameField) ||
-        +nameField <= 0 ||
-        +nameField >= 99
-      ) {
+      if (!Number.isInteger(+nameField) || +nameField < 0 || +nameField > 99) {
         nameFormData.setAttribute(
           "data-error",
           "Veuillez saisir un " + nameLabel + " correct"
